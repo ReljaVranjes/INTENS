@@ -1,0 +1,39 @@
+Svaki korisnik bi imao svoj personalizovan prioritetni rjecnik.
+Na osnovu njega bih sortirao vrijednosti koje su u ponudi pretrage.
+
+npr.
+
+predmeti = [
+    {'ime': 'BMW', 'kategorija': 'vozila'},
+    {'ime': 'Njemacki ovcar', 'kategorija': 'ljubimci'},
+    {'ime': 'vikendica na Fruskoj Gori', 'kategorija': 'nekretnine'},       #lista rjecnika informacija o predmetima
+    {'ime': 'hrcak', 'kategorija': 'ljubimci'},
+    {'ime': 'Mercedes', 'kategorija': 'vozila'},
+    {'ime': 'Kuca u centru grada', 'kategorija': 'nekretnine'},
+    {'ime': 'Laptop', 'kategorija': 'tehnologija'},
+    {'ime': 'Majica', 'kategorija': 'odjeca'},
+]
+
+prioriteti = {'vozila': 1, 'ljubimci': 2, 'nekretnine': 3}		    #prioritetni rjecnik
+
+def prioritet_kategorije(predmet):
+    return prioriteti.get(predmet['kategorija'], len(prioriteti)+1)	    #funkcija koja vraca prioritet kategorije predmeta,
+								             ukoliko nije u prioritetima daje joj najmanji prioritet
+
+sortirano = sorted(predmeti, key = prioritet_kategorije) 		    #funkciji sorted saljemo funkciju prioritet_kategorije
+									      kao key argument, da bi po njemu sortirala
+print(sortirano)
+
+
+ISPIS:
+
+[
+	{'ime': 'BMW', 'kategorija': 'vozila'}, 
+	{'ime': 'Mercedes', 'kategorija': 'vozila'}, 
+	{'ime': 'Njemacki ovcar', 'kategorija': 'ljubimci'}, 
+	{'ime': 'hrcak', 'kategorija': 'ljubimci'}, 
+	{'ime': 'vikendica na Fruskoj Gori', 'kategorija': 'nekretnine'}, 
+	{'ime': 'Kuca u centru grada', 'kategorija': 'nekretnine'}, 
+	{'ime': 'Laptop', 'kategorija': 'tehnologija'},
+	{'ime': 'Majica', 'kategorija': 'odjeca'}
+]

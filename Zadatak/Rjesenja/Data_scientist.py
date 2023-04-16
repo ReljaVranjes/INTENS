@@ -11,8 +11,9 @@ import heapq
 import matplotlib.pyplot as plt
 import requests
 
-file1 = 'C:\\Users\\User\\Desktop\\INTENS\\Zadatak\\Zadatak\\descriptive_attributes.csv'
-file2 = 'C:\\Users\\User\\Desktop\\INTENS\\Zadatak\\Zadatak\\numeric_atributes.csv'
+path = 'C:\\Users\\User\\Desktop\\INTENS-master\\Zadatak\\Rjesenja\\'
+file1 = 'C:\\Users\\User\\Desktop\\INTENS-master\\Zadatak\\descriptive_attributes.csv'
+file2 = 'C:\\Users\\User\\Desktop\\INTENS-master\\Zadatak\\numeric_atributes.csv'
 
 def merge_2_files(file1,file2):
 
@@ -24,7 +25,7 @@ def merge_2_files(file1,file2):
     merged_df = pd.merge(df1, df2, on='movieID', how = "inner")
 
     # Save the merged dataframe to a new CSV file
-    merged_df.to_csv('merged_file.csv', index=False)
+    merged_df.to_csv(path + 'merged_file.csv', index=False)
     merged_file = 'merged_file.csv'
     print("Merged 2 files into merged_file.csv")
     return merged_file
@@ -70,13 +71,13 @@ def draw_histogram(averageRatings):
     plt.title('Average Rating', fontsize=12)
     plt.xlabel('Distribution', fontsize=10)
     plt.ylabel('Frequency', fontsize=10)
-    plt.savefig("histogram.png")
+    plt.savefig(path + "histogram.png")
     #plt.show()
     print("Histogram saved as histogram.png.")
     return
 
 def write_selected_movies(selected_movies):  
-    with open("movies.csv","w",encoding='utf-8',newline = '') as file:
+    with open(path + "movies.csv","w",encoding='utf-8',newline = '') as file:
 
         print(f"Writing movies made after year 2000 with rating above 3 in movies.txt. (Count : {len(selected_movies)}) ")
         writer = csv.writer(file)
@@ -103,7 +104,7 @@ def calculate_and_write_average_by_title(data):
     for title in titleTypesRatings:
         writer_data.append([title,titleTypesRatings[title]])
     
-    with open('titles_ratings.csv', 'w',encoding="utf-8", newline='') as f:
+    with open(path + 'titles_ratings.csv', 'w',encoding="utf-8", newline='') as f:
         writer = csv.writer(f)
         print("Writing titles and their average ratings into titles_ratings.csv.")
         for row in tqdm(writer_data):
@@ -159,7 +160,7 @@ def count_and_write_words(data):
     for word in uniqueWords:
         write_data.append([word,uniqueWords[word]])
 
-    with open('words.csv', 'w',encoding="utf-8", newline='') as f:
+    with open(path + 'words.csv', 'w',encoding="utf-8", newline='') as f:
         writer = csv.writer(f)
         print("Writing words and their counts into words.csv.")
         for row in tqdm(write_data):
@@ -170,7 +171,7 @@ def add_similar_and_extract_10(filename,similarities,ten_most_similar):
     df = pd.read_csv(filename)
     print("Writing similarities to with_similarities.csv.")
     df['similarity %'] = tqdm(similarities)
-    df.to_csv('with_similarities.csv', index=False)
+    df.to_csv(path + 'with_similarities.csv', index=False)
     
     
     write_data = [["primaryTitle","similarity %"]]
@@ -178,7 +179,7 @@ def add_similar_and_extract_10(filename,similarities,ten_most_similar):
         write_data.append([ten_most_similar[i][0],ten_most_similar[i][1]])
     
     print("Writing 10 most similar into most_similar.csv.")
-    with open("most_similar.csv","w",newline='') as file:
+    with open(path + "most_similar.csv","w",newline='') as file:
         writer = csv.writer(file)
         for row in tqdm(write_data):
             writer.writerow(row)
