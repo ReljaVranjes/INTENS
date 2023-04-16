@@ -3,7 +3,7 @@ import re
 from collections import defaultdict
 import csv
 
-path = 'C:\\Users\\User\\Desktop\\INTENS\\WSC_Python\\Rjesenja\\'
+path = 'C:\\Users\\User\\Desktop\\INTENS-master\\WSC_Python\\Rjesenja\\'
 
 def process_tarrifs():
 
@@ -115,7 +115,7 @@ def write_to_file(UniqueWords):
         # write the data
         writer.writerows(data_to_write)
 
-excel_file = pd.read_excel(r"C:\Users\User\Desktop\INTENS\WSC_Python\WSC Input.xlsx")
+excel_file = pd.read_excel(r"C:\Users\User\Desktop\INTENS-master\WSC_Python\WSC Input.xlsx")
 
 dict_of_excel = excel_file.to_dict()
 Description = list(dict_of_excel["Description"].values())
